@@ -4,7 +4,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+  font-family: "Roboto Condensed", sans-serif;
 }
 
 body {
@@ -91,7 +91,7 @@ ul {
 }
 
 ul li {
-  background: #fff;
+  background: #c6d8ff;
   padding: 8px;
   margin-top: 10px;
   border-radius: 5px;
