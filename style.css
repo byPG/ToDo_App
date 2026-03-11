@@ -50,7 +50,7 @@ header {
   gap: 10px;
 }
 
-input {
+.addTask input {
   flex: 1;
   min-height: 40px;
   padding: 8px 12px;
@@ -60,9 +60,18 @@ input {
   transition: border-color 0.3s ease;
 }
 
-input:focus {
+.addTask input:focus {
   outline: none;
   border-color: #005db9;
+}
+
+input {
+  margin-right: 5px;
+}
+
+span {
+  width: 100%;
+  text-align: left;
 }
 
 button {
@@ -79,10 +88,14 @@ button {
 }
 
 button:hover {
-  background: #004494;
+  background: #d00000;
 }
 
-button:active {
+button.addTaskBtn:hover {
+  background: #31bd1f;
+}
+
+button.addTaskBtn:active {
   transform: scale(0.98);
 }
 
@@ -106,4 +119,10 @@ ul li {
 ul li:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 10px rgba(0, 24, 145, 0.5);
+}
+
+.doneTask {
+  text-decoration: line-through;
+  color: #888;
+  background: #d4fbde;
 }

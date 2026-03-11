@@ -5,29 +5,45 @@ const inputWithTask = document.getElementById('taskInput');
 const taskList = document.getElementById('taskList');
 
 
-function addAndDeleteTask() {
+function createTask() {
     const taskText = inputWithTask.value.trim();
 
     if (taskText) {
         const li = document.createElement('li');
-        li.textContent = taskText; 
         taskList.appendChild(li);
         inputWithTask.value = '';
 
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        li.appendChild(checkbox);
+
+        const textTask = document.createElement('span');
+        textTask.textContent = taskText;
+        li.appendChild(textTask);
+
         const deleteBtn = document.createElement('button');
-        deleteBtn.textContent = 'Delete';
+        deleteBtn.textContent = 'x';
         li.appendChild(deleteBtn);
 
         deleteBtn.addEventListener('click', () => {
-        li.remove(); // Remove the task item when delete button is clicked
-});
+        li.remove(); })
+
+        checkbox.addEventListener('change', () => {
+            if (checkbox.checked) {
+                li.classList.add('doneTask');
+            } else {
+                li.classList.remove('doneTask');
+            }
+        });
+
     }
 }
 
-buttonAddTask.addEventListener('click', addAndDeleteTask);  // Listen for button click
-inputWithTask.addEventListener('keypress', (e) => { // Listen for the Enter key
+
+buttonAddTask.addEventListener('click', createTask);  // Listen for button click
+inputWithTask.addEventListener('keydown', (e) => { // Listen for the Enter key
     if (e.key === 'Enter') {
-        addAndDeleteTask();
+        createTask();
     }
 });
 
