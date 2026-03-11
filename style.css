@@ -75,7 +75,7 @@ span {
 }
 
 button {
-  padding: 8px 20px;
+  padding: 2px 8px;
   border: none;
   background: #005db9;
   color: #fff;
@@ -89,6 +89,19 @@ button {
 
 button:hover {
   background: #d00000;
+}
+
+button.addTaskBtn {
+  padding: 8px 20px;
+  border: none;
+  background: #005db9;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  white-space: nowrap;
 }
 
 button.addTaskBtn:hover {

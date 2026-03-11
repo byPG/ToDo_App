@@ -31,8 +31,10 @@ function createTask() {
         checkbox.addEventListener('change', () => {
             if (checkbox.checked) {
                 li.classList.add('doneTask');
+                li.removeChild(deleteBtn);
             } else {
                 li.classList.remove('doneTask');
+                li.appendChild(deleteBtn);
             }
         });
 
