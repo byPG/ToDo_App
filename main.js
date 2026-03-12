@@ -32,13 +32,14 @@ function createTask() {
 
        const delateTaskFunction = function () {
             delateTaskBtn.addEventListener('click', () => {
-                    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-    const taskIndex = tasks.findIndex(task => task.text === taskText);
 
-    if (taskIndex !== -1) {
-        tasks.splice(taskIndex, 1);
-        localStorage.setItem('tasks', JSON.stringify(tasks));
-    }
+        //local Storage, tablica zadań, usuwanie zadania z localStorage
+        let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+        const taskIndex = tasks.findIndex(task => task.text === taskText);
+        if (taskIndex !== -1) {
+            tasks.splice(taskIndex, 1);
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
 
                 li.remove();
             });
@@ -53,16 +54,15 @@ function createTask() {
                     li.classList.remove('doneTask');
                 }
 
-
+            //local Storage, tablica zadań, aktualizacja statusu zadania w localStorage
             let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
             const taskToUpdate = tasks.find(task => task.text === taskText);
 
             if (taskToUpdate) {
                 taskToUpdate.done = checkbox.checked;
                 localStorage.setItem('tasks', JSON.stringify(tasks));
-            }
-
-            });
+            } 
+        });
         };
         toggleCheckboxFunction();
 
@@ -85,7 +85,7 @@ savedTasks.forEach((task) => {
     const li = document.createElement('li');
     taskList.appendChild(li);
 
-    if (task.done) { //
+    if (task.done) { // If the task is marked as done, add the 'doneTask' class
     li.classList.add('doneTask');
     }
 
@@ -103,14 +103,15 @@ savedTasks.forEach((task) => {
     li.appendChild(delateTaskBtn);
 
     delateTaskBtn.addEventListener('click', () => {
-            let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+
+    //local Storage, tablica zadań, usuwanie zadania z localStorage
+    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
     const taskIndex = tasks.findIndex(item => item.text === task.text);
 
     if (taskIndex !== -1) {
         tasks.splice(taskIndex, 1);
         localStorage.setItem('tasks', JSON.stringify(tasks));
     }
-
 
         li.remove();
     });
@@ -122,6 +123,7 @@ savedTasks.forEach((task) => {
             li.classList.remove('doneTask');
         }
 
+        //local Storage, tablica zadań, aktualizacja statusu zadania w localStorage
         let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
         const taskToUpdate = tasks.find(item => item.text === task.text);
 
