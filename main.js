@@ -4,7 +4,6 @@ const buttonAddTask = document.getElementById('addTask');
 const inputWithTask = document.getElementById('taskInput');
 const taskList = document.getElementById('taskList');
 
-
 function createTask() {
     const taskText = inputWithTask.value.trim();
 
@@ -21,23 +20,36 @@ function createTask() {
         textTask.textContent = taskText;
         li.appendChild(textTask);
 
-        const deleteBtn = document.createElement('button');
-        deleteBtn.textContent = 'x';
-        li.appendChild(deleteBtn);
+        const delateTaskBtn = document.createElement('button');
+        delateTaskBtn.textContent = 'x';
+        li.appendChild(delateTaskBtn);
 
-        deleteBtn.addEventListener('click', () => {
-        li.remove(); })
+        //local Storage, tablica zadań, dodawanie zadania do localStorage
+        const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+        tasks.push(taskText);
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+        //
 
-        checkbox.addEventListener('change', () => {
-            if (checkbox.checked) {
-                li.classList.add('doneTask');
-            } else {
-                li.classList.remove('doneTask');
-            }
-        });
+       const delateTaskFunction = function () {
+            delateTaskBtn.addEventListener('click', () => {
+                li.remove();
+            });
+        };
+        delateTaskFunction();
 
+       const toggleCheckboxFunction = function () {
+            checkbox.addEventListener('change', () => {
+                if (checkbox.checked) {
+                    li.classList.add('doneTask');
+                } else {
+                    li.classList.remove('doneTask');
+                }
+            });
+        };
+        toggleCheckboxFunction();
+
+        };
     }
-}
 
 
 buttonAddTask.addEventListener('click', createTask);  // Listen for button click
@@ -47,4 +59,35 @@ inputWithTask.addEventListener('keydown', (e) => { // Listen for the Enter key
     }
 });
 
+// Load tasks from localStorage when the page loads
+document.addEventListener("DOMContentLoaded", function () {
+const savedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
+savedTasks.forEach((task) => {
+    const li = document.createElement('li');
+    taskList.appendChild(li);
+
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    li.appendChild(checkbox);
+
+    const textTask = document.createElement('span');
+    textTask.textContent = task;
+    li.appendChild(textTask);
+
+    const delateTaskBtn = document.createElement('button');
+    delateTaskBtn.textContent = 'x';
+    li.appendChild(delateTaskBtn);
+
+    delateTaskBtn.addEventListener('click', () => {
+        li.remove();
+    });
+
+    checkbox.addEventListener('change', () => {
+        if (checkbox.checked) {
+            li.classList.add('doneTask');
+        } else {
+            li.classList.remove('doneTask');
+        }
+    });
+});});
