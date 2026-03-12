@@ -26,12 +26,20 @@ function createTask() {
 
         //local Storage, tablica zadań, dodawanie zadania do localStorage
         const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-        tasks.push(taskText);
+        tasks.push({text: taskText, done: false});
         localStorage.setItem('tasks', JSON.stringify(tasks));
         //
 
        const delateTaskFunction = function () {
             delateTaskBtn.addEventListener('click', () => {
+                    let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    const taskIndex = tasks.findIndex(task => task.text === taskText);
+
+    if (taskIndex !== -1) {
+        tasks.splice(taskIndex, 1);
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+
                 li.remove();
             });
         };
@@ -44,6 +52,16 @@ function createTask() {
                 } else {
                     li.classList.remove('doneTask');
                 }
+
+
+            let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+            const taskToUpdate = tasks.find(task => task.text === taskText);
+
+            if (taskToUpdate) {
+                taskToUpdate.done = checkbox.checked;
+                localStorage.setItem('tasks', JSON.stringify(tasks));
+            }
+
             });
         };
         toggleCheckboxFunction();
@@ -67,12 +85,17 @@ savedTasks.forEach((task) => {
     const li = document.createElement('li');
     taskList.appendChild(li);
 
+    if (task.done) { //
+    li.classList.add('doneTask');
+    }
+
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
+    checkbox.checked = task.done; // Set checkbox state based on saved task
     li.appendChild(checkbox);
 
     const textTask = document.createElement('span');
-    textTask.textContent = task;
+    textTask.textContent = task.text;
     li.appendChild(textTask);
 
     const delateTaskBtn = document.createElement('button');
@@ -80,6 +103,15 @@ savedTasks.forEach((task) => {
     li.appendChild(delateTaskBtn);
 
     delateTaskBtn.addEventListener('click', () => {
+            let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    const taskIndex = tasks.findIndex(item => item.text === task.text);
+
+    if (taskIndex !== -1) {
+        tasks.splice(taskIndex, 1);
+        localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+
+
         li.remove();
     });
 
@@ -89,5 +121,13 @@ savedTasks.forEach((task) => {
         } else {
             li.classList.remove('doneTask');
         }
-    });
+
+        let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+        const taskToUpdate = tasks.find(item => item.text === task.text);
+
+        if (taskToUpdate) {
+            taskToUpdate.done = checkbox.checked;
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
+        });
 });});
