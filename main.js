@@ -41,13 +41,12 @@ function createTask() {
                 li.remove();
             });
      
-
         checkbox.addEventListener('change', () => {
-                if (checkbox.checked) {
-                    li.classList.add('doneTask');
-                } else {
-                    li.classList.remove('doneTask');
-                }
+            if (checkbox.checked) {
+                li.classList.add('doneTask');
+            } else {
+                li.classList.remove('doneTask');
+            }
         //local Storage, aktualizacja statusu zadania w localStorage
         let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
         const taskToUpdate = tasks.find(item => item.text === taskText); // Find the task in the array based on its text; find () zwraca obiekt zadania, który ma zostać zaktualizowany
@@ -66,8 +65,6 @@ inputWithTask.addEventListener('keydown', (e) => { // Listen for the Enter key
         createTask();
     }
 });
-
-
 
 // Load tasks from localStorage when the page loads
 document.addEventListener("DOMContentLoaded", function () {
