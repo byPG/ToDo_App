@@ -31,12 +31,11 @@ function createTask() {
         //
 
         delateTaskBtn.addEventListener('click', () => {
-
         //local Storage, tablica zadań, usuwanie zadania z localStorage
         let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-        const taskIndex = tasks.findIndex(task => task.text === taskText);
-        if (taskIndex !== -1) {
-            tasks.splice(taskIndex, 1);
+        const taskIndex = tasks.findIndex(item => item.text === taskText); // Find the index of the task in the array based on its text
+        if (taskIndex !== -1) { //jesli wynik nie jest -1, to znaczy, że zadanie zostało znalezione w tablicy
+            tasks.splice(taskIndex, 1); // Remove the task from the array
             localStorage.setItem('tasks', JSON.stringify(tasks));
         }
                 li.remove();
@@ -52,8 +51,7 @@ function createTask() {
 
             //local Storage, tablica zadań, aktualizacja statusu zadania w localStorage
             let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-            const taskToUpdate = tasks.find(task => task.text === taskText);
-
+            const taskToUpdate = tasks.find(item => item.text === taskText); // Find the task in the array based on its text; find () zwraca obiekt zadania, który ma zostać zaktualizowany
             if (taskToUpdate) {
                 taskToUpdate.done = checkbox.checked;
                 localStorage.setItem('tasks', JSON.stringify(tasks));
@@ -77,6 +75,7 @@ inputWithTask.addEventListener('keydown', (e) => { // Listen for the Enter key
 document.addEventListener("DOMContentLoaded", function () {
 const savedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
 
+//we take the saved tasks from localStorage and create list items for each task, just like we do when we add a new task. We also set the checkbox state and the 'doneTask' class based on the saved task's properties.
 savedTasks.forEach((task) => {
     const li = document.createElement('li');
     taskList.appendChild(li);
@@ -102,7 +101,7 @@ savedTasks.forEach((task) => {
 
     //local Storage, tablica zadań, usuwanie zadania z localStorage
     let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-    const taskIndex = tasks.findIndex(task => task.text === task.text);
+    const taskIndex = tasks.findIndex(item => item.text === task.text)
 
     if (taskIndex !== -1) {
         tasks.splice(taskIndex, 1);
@@ -121,7 +120,7 @@ savedTasks.forEach((task) => {
 
         //local Storage, tablica zadań, aktualizacja statusu zadania w localStorage
         let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-        const taskToUpdate = tasks.find(task => task.text === task.text);
+        const taskToUpdate = tasks.find(item => item.text === task.text)
 
         if (taskToUpdate) {
             taskToUpdate.done = checkbox.checked;
