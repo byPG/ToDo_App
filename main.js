@@ -30,8 +30,7 @@ function createTask() {
         localStorage.setItem('tasks', JSON.stringify(tasks));
         //
 
-       const delateTaskFunction = function () {
-            delateTaskBtn.addEventListener('click', () => {
+        delateTaskBtn.addEventListener('click', () => {
 
         //local Storage, tablica zadań, usuwanie zadania z localStorage
         let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
@@ -40,14 +39,11 @@ function createTask() {
             tasks.splice(taskIndex, 1);
             localStorage.setItem('tasks', JSON.stringify(tasks));
         }
-
                 li.remove();
             });
-        };
-        delateTaskFunction();
+     
 
-       const toggleCheckboxFunction = function () {
-            checkbox.addEventListener('change', () => {
+        checkbox.addEventListener('change', () => {
                 if (checkbox.checked) {
                     li.classList.add('doneTask');
                 } else {
@@ -63,8 +59,6 @@ function createTask() {
                 localStorage.setItem('tasks', JSON.stringify(tasks));
             } 
         });
-        };
-        toggleCheckboxFunction();
 
         };
     }
