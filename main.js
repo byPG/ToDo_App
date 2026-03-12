@@ -24,20 +24,20 @@ function createTask() {
         delateTaskBtn.textContent = 'x';
         li.appendChild(delateTaskBtn);
 
-        //local Storage, tablica zadań, dodawanie zadania do localStorage
+        //local Storage, dodawanie zadania do localStorage
         const tasks = JSON.parse(localStorage.getItem('tasks')) || [];
         tasks.push({text: taskText, done: false});
         localStorage.setItem('tasks', JSON.stringify(tasks));
         //
 
         delateTaskBtn.addEventListener('click', () => {
-        //local Storage, tablica zadań, usuwanie zadania z localStorage
+        //local Storage, usuwanie zadania z localStorage
         let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
         const taskIndex = tasks.findIndex(item => item.text === taskText); // Find the index of the task in the array based on its text
-        if (taskIndex !== -1) { //jesli wynik nie jest -1, to znaczy, że zadanie zostało znalezione w tablicy
-            tasks.splice(taskIndex, 1); // Remove the task from the array
-            localStorage.setItem('tasks', JSON.stringify(tasks));
-        }
+            if (taskIndex !== -1) { //jesli wynik nie jest -1, to znaczy, że zadanie zostało znalezione w tablicy
+                tasks.splice(taskIndex, 1); // Remove the task from the array
+                localStorage.setItem('tasks', JSON.stringify(tasks));
+            }
                 li.remove();
             });
      
@@ -48,19 +48,17 @@ function createTask() {
                 } else {
                     li.classList.remove('doneTask');
                 }
-
-            //local Storage, tablica zadań, aktualizacja statusu zadania w localStorage
-            let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-            const taskToUpdate = tasks.find(item => item.text === taskText); // Find the task in the array based on its text; find () zwraca obiekt zadania, który ma zostać zaktualizowany
-            if (taskToUpdate) {
-                taskToUpdate.done = checkbox.checked;
-                localStorage.setItem('tasks', JSON.stringify(tasks));
-            } 
+        //local Storage, aktualizacja statusu zadania w localStorage
+        let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
+        const taskToUpdate = tasks.find(item => item.text === taskText); // Find the task in the array based on its text; find () zwraca obiekt zadania, który ma zostać zaktualizowany
+        if (taskToUpdate) {
+            taskToUpdate.done = checkbox.checked;
+            localStorage.setItem('tasks', JSON.stringify(tasks));
+        } 
         });
 
         };
     }
-
 
 buttonAddTask.addEventListener('click', createTask);  // Listen for button click
 inputWithTask.addEventListener('keydown', (e) => { // Listen for the Enter key
@@ -80,7 +78,7 @@ savedTasks.forEach((task) => {
     const li = document.createElement('li');
     taskList.appendChild(li);
 
-    if (task.done) { // If the task is marked as done, add the 'doneTask' class
+    if (task.done === true) { // If the task is marked as done, add the 'doneTask' class
     li.classList.add('doneTask');
     }
 
@@ -98,8 +96,6 @@ savedTasks.forEach((task) => {
     li.appendChild(delateTaskBtn);
 
     delateTaskBtn.addEventListener('click', () => {
-
-    //local Storage, tablica zadań, usuwanie zadania z localStorage
     let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
     const taskIndex = tasks.findIndex(item => item.text === task.text)
 
@@ -107,7 +103,6 @@ savedTasks.forEach((task) => {
         tasks.splice(taskIndex, 1);
         localStorage.setItem('tasks', JSON.stringify(tasks));
     }
-
         li.remove();
     });
 
@@ -117,11 +112,9 @@ savedTasks.forEach((task) => {
         } else {
             li.classList.remove('doneTask');
         }
-
-        //local Storage, tablica zadań, aktualizacja statusu zadania w localStorage
+        //local Storage, aktualizacja statusu zadania w localStorage
         let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
         const taskToUpdate = tasks.find(item => item.text === task.text)
-
         if (taskToUpdate) {
             taskToUpdate.done = checkbox.checked;
             localStorage.setItem('tasks', JSON.stringify(tasks));
