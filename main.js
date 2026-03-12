@@ -77,6 +77,8 @@ inputWithTask.addEventListener('keydown', (e) => { // Listen for the Enter key
     }
 });
 
+
+
 // Load tasks from localStorage when the page loads
 document.addEventListener("DOMContentLoaded", function () {
 const savedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
@@ -106,7 +108,7 @@ savedTasks.forEach((task) => {
 
     //local Storage, tablica zadań, usuwanie zadania z localStorage
     let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-    const taskIndex = tasks.findIndex(item => item.text === task.text);
+    const taskIndex = tasks.findIndex(task => task.text === task.text);
 
     if (taskIndex !== -1) {
         tasks.splice(taskIndex, 1);
@@ -125,7 +127,7 @@ savedTasks.forEach((task) => {
 
         //local Storage, tablica zadań, aktualizacja statusu zadania w localStorage
         let tasks = JSON.parse(localStorage.getItem('tasks')) || [];
-        const taskToUpdate = tasks.find(item => item.text === task.text);
+        const taskToUpdate = tasks.find(task => task.text === task.text);
 
         if (taskToUpdate) {
             taskToUpdate.done = checkbox.checked;
