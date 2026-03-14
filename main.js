@@ -36,7 +36,7 @@ function renderTask(task) {
         deleteTaskBtn.addEventListener('click', () => { //listener jest tworzony dla kazdego taska osobno, więc kiedy klikniemy przycisk usuwania, to usuniemy tylko ten konkretny task, do którego przypisany jest ten listener. W ten sposób możemy mieć wiele zadań na liście, a każde z nich będzie miało swój własny przycisk usuwania, który działa tylko dla tego zadania.
         //local Storage, usuwanie zadania z localStorage
         let tasks = getTasks();
-        const taskIndex = tasks.findIndex(item => item.text === task.text); // Find the index of the task in the array based on its text
+        const taskIndex = tasks.findIndex(item => item.id === task.id); // Find the index of the task in the array based on its ID
             if (taskIndex !== -1) { //jesli wynik nie jest -1, to znaczy, że zadanie zostało znalezione w tablicy
                 tasks.splice(taskIndex, 1); // Remove the task from the array
                 saveTasks(tasks); // Save the updated array back to localStorage
@@ -52,7 +52,7 @@ function renderTask(task) {
             }
             //local Storage, aktualizacja statusu zadania w localStorage
             let tasks = getTasks()
-            const taskToUpdate = tasks.find(item => item.text === task.text); // Find the task in the array based on its text; find () zwraca obiekt zadania, który ma zostać zaktualizowany
+            const taskToUpdate = tasks.find(item => item.id === task.id); // Find the task in the array based on its ID; find () zwraca obiekt zadania, który ma zostać zaktualizowany
             if (taskToUpdate) {
                 taskToUpdate.done = checkbox.checked;
                 saveTasks(tasks);
@@ -69,7 +69,8 @@ function createTask() {
         //local Storage, dodawanie zadania do localStorage
         const newTask = {
             text: taskText,
-            done: false
+            done: false,
+            id: Date.now() // Generate a unique ID for the task based on the current timestamp
         };
         const tasks = getTasks();
         tasks.push(newTask);
