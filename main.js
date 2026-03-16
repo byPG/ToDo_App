@@ -27,7 +27,7 @@ function renderTask(task) {
 
         if (task.done === true) { // If the task is marked as done, add the 'doneTask' class
                textTask.classList.add('doneTask');
-               li.style.backgroundColor = '#d4fbde'; // Change background color for completed tasks
+               li.style.backgroundColor = '#d4fbde'; 
             }
 
         const editTaskBtn = document.createElement('button');
