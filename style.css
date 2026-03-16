@@ -76,6 +76,7 @@ span {
 
 button {
   padding: 2px 8px;
+  margin: 0 2px;
   border: none;
   background: #005db9;
   color: #fff;
@@ -93,15 +94,6 @@ button:hover {
 
 button.addTaskBtn {
   padding: 8px 20px;
-  border: none;
-  background: #005db9;
-  color: #fff;
-  font-size: 14px;
-  font-weight: 500;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background 0.3s ease;
-  white-space: nowrap;
 }
 
 button.addTaskBtn:hover {
@@ -109,6 +101,14 @@ button.addTaskBtn:hover {
 }
 
 button.addTaskBtn:active {
+  transform: scale(0.98);
+}
+
+button.editTaskBtn:hover {
+  background: #de9400;
+}
+
+button.editTaskBtn:active {
   transform: scale(0.98);
 }
 

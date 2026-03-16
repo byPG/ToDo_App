@@ -13,13 +13,9 @@ function saveTasks(tasks) {
 }
 
 function renderTask(task) {
-       const li = document.createElement('li');
+        const li = document.createElement('li');
         ulTaskList.appendChild(li);
 
-         if (task.done === true) { // If the task is marked as done, add the 'doneTask' class
-            li.classList.add('doneTask');
-        }
-        
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
         checkbox.checked = task.done; // Set checkbox state based on saved task
@@ -28,6 +24,30 @@ function renderTask(task) {
         const textTask = document.createElement('span');
         textTask.textContent = task.text;
         li.appendChild(textTask);
+
+        if (task.done === true) { // If the task is marked as done, add the 'doneTask' class
+               textTask.classList.add('doneTask');
+               li.style.backgroundColor = '#d4fbde'; // Change background color for completed tasks
+            }
+
+        const editTaskBtn = document.createElement('button');
+        editTaskBtn.textContent = 'Edit';
+        editTaskBtn.classList.add('editTaskBtn');
+        li.appendChild(editTaskBtn);
+
+        editTaskBtn.addEventListener('click', () => { //edit task
+        let tasks = getTasks();
+        const taskIndex = tasks.findIndex(item => item.id === task.id); 
+            if (taskIndex !== -1) { //jesli wynik nie jest -1, to znaczy, że zadanie zostało znalezione w tablicy
+                const newText = prompt('Edit task:', tasks[taskIndex].text); // Prompt the user to enter the new text for the task, pre-filling the prompt with the current task text
+                if (newText !== null && newText.trim() !== '') { // Check if the user entered a non-empty value
+                    tasks[taskIndex].text = newText.trim(); // Update the task text in the array
+                    saveTasks(tasks); // Save the updated array back to localStorage
+                    textTask.textContent = newText.trim(); // Update the displayed task text
+                }
+            }
+          
+            });
 
         const deleteTaskBtn = document.createElement('button');
         deleteTaskBtn.textContent = 'x';
@@ -43,12 +63,14 @@ function renderTask(task) {
             }
                 li.remove();
             });
-     
+
         checkbox.addEventListener('change', () => {
             if (checkbox.checked) {  //ticked = true, unticked = false
-                li.classList.add('doneTask');
+                textTask.classList.add('doneTask');
+                li.style.backgroundColor = '#d4fbde'
             } else {
-                li.classList.remove('doneTask');
+                textTask.classList.remove('doneTask');
+                li.style.backgroundColor = '#c6d8ff';
             }
             //local Storage, aktualizacja statusu zadania w localStorage
             let tasks = getTasks()
@@ -65,7 +87,6 @@ function createTask() {
 
     if (taskText) {
         inputWithTask.value = '';
-
         //local Storage, dodawanie zadania do localStorage
         const newTask = {
             text: taskText,
