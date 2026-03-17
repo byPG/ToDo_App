@@ -36,7 +36,7 @@ function renderTask(task) {
         li.appendChild(editTaskBtn);
 
         editTaskBtn.addEventListener('click', () => { //edit task
-        let tasks = getTasks();
+        const tasks = getTasks();
         const taskIndex = tasks.findIndex(item => item.id === task.id); 
             if (taskIndex !== -1) { //jesli wynik nie jest -1, to znaczy, że zadanie zostało znalezione w tablicy
                 const newText = prompt('Edit task:', tasks[taskIndex].text); // Prompt the user to enter the new text for the task, pre-filling the prompt with the current task text
@@ -55,7 +55,7 @@ function renderTask(task) {
 
         deleteTaskBtn.addEventListener('click', () => { //listener jest tworzony dla kazdego taska osobno, więc kiedy klikniemy przycisk usuwania, to usuniemy tylko ten konkretny task, do którego przypisany jest ten listener. W ten sposób możemy mieć wiele zadań na liście, a każde z nich będzie miało swój własny przycisk usuwania, który działa tylko dla tego zadania.
         //local Storage, usuwanie zadania z localStorage
-        let tasks = getTasks();
+        const tasks = getTasks();
         const taskIndex = tasks.findIndex(item => item.id === task.id); // Find the index of the task in the array based on its ID
             if (taskIndex !== -1) { //jesli wynik nie jest -1, to znaczy, że zadanie zostało znalezione w tablicy
                 tasks.splice(taskIndex, 1); // Remove the task from the array
@@ -93,6 +93,7 @@ function createTask() {
             done: false,
             id: Date.now() // Generate a unique ID for the task based on the current timestamp
         };
+
         const tasks = getTasks();
         tasks.push(newTask);
         saveTasks(tasks);
